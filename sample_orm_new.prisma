@@ -18,7 +18,7 @@ model Planes {
 
 model Image {
   id              String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  data            Data
+  data            String
   melId           String
   parentUserId    String?  @db.Uuid
   parentCarId     String?  @db.Uuid
