@@ -1,18 +1,18 @@
 model Users {
   id       String          @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  images.  Image[]         @relation("UserComments")
+  images.  Image[]         @relation("UserImages")
   @@map("users")
 }
 
 model Cars {
   id         String        @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  images     Image[]       @relation("CarComments")
+  images     Image[]       @relation("CarImages")
   @@map("cars")
 }
 
 model Planes {
   id         String        @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
-  comments   Image[]       @relation("PlaneComments")
+  comments   Image[]       @relation("PlaneImages")
   @@map("planes")
 }
 
@@ -22,9 +22,9 @@ model Images {
   parentUserId    String?  @db.Uuid
   parentCarId     String?  @db.Uuid
   parentPlaneId   String?  @db.Uuid
-  user            User?    @relation("UserComments", fields: [parentUserId], references: [id])
-  car             Cars?    @relation("CarComments", fields: [parentCarId], references: [id])
-  plane           Planes?  @relation("PlaneComments", fields: [parentPlaneId], references: [id])
+  user            User?    @relation("UserImages", fields: [parentUserId], references: [id])
+  car             Cars?    @relation("CarCImages", fields: [parentCarId], references: [id])
+  plane           Planes?  @relation("PlaneImages", fields: [parentPlaneId], references: [id])
 
   @@map("images")
 }
