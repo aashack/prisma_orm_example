@@ -1,0 +1,31 @@
+model User {
+  id       String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  images.  Image[]  @relation("UserComments")
+  @@map("users")
+}
+
+model Cars {
+  id         String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  images     Image[] @relation("CarComments")
+  @@map("cars")
+}
+
+model Planes {
+  id         String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  comments   Image[] @relation("PlaneComments")
+  @@map("planes")
+}
+
+model Image {
+  id              String  @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  data            Data
+  melId           String
+  parentUserId    String?  @db.Uuid
+  parentCarId     String?  @db.Uuid
+  parentPlaneId   String?  @db.Uuid
+  author          User?   @relation("UserComments", fields: [parentUserId], references: [id])
+  recipe          Recipe? @relation("CarComments", fields: [parentCarId], references: [id])
+  recipe          Recipe? @relation("PlaneComments", fields: [parentPlaneId], references: [id])
+
+  @@map("images")
+}
