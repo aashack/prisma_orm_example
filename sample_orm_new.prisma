@@ -1,4 +1,4 @@
-model User {
+model Users {
   id       String          @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   images.  Image[]         @relation("UserComments")
   @@map("users")
@@ -16,7 +16,7 @@ model Planes {
   @@map("planes")
 }
 
-model Image {
+model Images {
   id              String   @id @unique @default(dbgenerated("gen_random_uuid()")) @db.Uuid
   data            String
   parentUserId    String?  @db.Uuid
